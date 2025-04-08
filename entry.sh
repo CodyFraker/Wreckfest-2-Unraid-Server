@@ -20,7 +20,13 @@ echo "----------------"
 
 # experimental console env var is EXPERIMENTAL_CONSOLE=1
 
-if [ "$EXPERIMENTAL_CONSOLE" =~ "1" ]; then
+if [ "$EXPERIMENTAL_CONSOLE" = "1" ]; then
+    echo "hello"
+else
+    echo "world"
+fi
+
+if [ "$EXPERIMENTAL_CONSOLE" == "1" ]; then
     echo "----------------"
     echo "START Wreckfest 2 Dedicated Server in WINE"
     echo "----------------"
