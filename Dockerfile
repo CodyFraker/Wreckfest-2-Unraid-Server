@@ -1,4 +1,6 @@
-FROM debian:bookworm-slim
+ARG CONSOLE=no-console
+
+FROM debian:bookworm-slim AS base
 
 RUN echo "deb http://deb.debian.org/debian bookworm contrib non-free non-free-firmware" > /etc/apt/sources.list
 
@@ -37,14 +39,6 @@ RUN echo steam steam/license note '' | debconf-set-selections
 
 RUN apt install -y steamcmd
 
-# Set up virtual display & tools
-
-RUN apt install -y xserver-xorg-video-dummy
-
-RUN apt install -y xdotool
-
-RUN apt install -y xclip
-
 # Set up steam stuff
 
 RUN useradd -m steam
@@ -62,6 +56,22 @@ ENV SERVERCONFIGDIR /home/steam/wf2-config
 
 ENV STEAMAPPID 3519390
 
+RUN mkdir -p ${STEAMAPPDIR} ${SERVERCONFIGDIR}
+
+# WITH CONSOLE
+
+FROM base AS version-with-console
+
+# Set up virtual display & tools
+
+USER root
+
+RUN apt install -y xserver-xorg-video-dummy
+
+RUN apt install -y xdotool
+
+RUN apt install -y xclip
+
 ENV XLOGDIR /home/steam/logs/x
 
 ENV WINELOGDIR /home/steam/logs/wine
@@ -70,7 +80,9 @@ ENV WFLOGFILEDIR /home/steam/logs/wf
 
 ENV WRAPPERDIR /home/steam/wrapper
 
-RUN mkdir -p ${STEAMAPPDIR} ${SERVERCONFIGDIR} ${XLOGDIR} ${WINELOGDIR} ${WFLOGFILEDIR} ${WRAPPERDIR}
+USER steam
+
+RUN mkdir -p ${XLOGDIR} ${WINELOGDIR} ${WFLOGFILEDIR} ${WRAPPERDIR}
 
 COPY --chown=steam wrapper ${WRAPPERDIR}
 
@@ -78,8 +90,16 @@ COPY --chown=steam dummy-640x480.conf /home/steam/dummy-640x480.conf
 
 COPY --chown=steam entry.sh /home/steam/entry.sh
 
-EXPOSE 30100/udp
+# WITHOUT CONSOLE
 
-ENV EXPERIMENTAL_CONSOLE "0"
+FROM base AS version-no-console
+
+COPY --chown=steam entry-no-console.sh /home/steam/entry.sh
+
+# COMMON
+
+FROM version-${CONSOLE}
+
+EXPOSE 30100/udp
 
 ENTRYPOINT [ "./entry.sh" ]

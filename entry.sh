@@ -6,66 +6,56 @@ export DISPLAY=:0
 X -config /home/steam/dummy-640x480.conf >> "${XLOGDIR}/stdout.log" 2>> "${XLOGDIR}/stderr.log" &
 
 echo "----------------"
-echo "START Installing Wreckfest 2 Dedicated Server from Steam"
+echo "Installing Wreckfest 2 Dedicated Server from Steam"
 echo "----------------"
 
 # install wreckfest 2 server
 /usr/games/steamcmd +force_install_dir "$STEAMAPPDIR" +login anonymous +@sSteamCmdForcePlatformType windows +app_update "$STEAMAPPID" validate +quit
-# run wreckfest 2 server in background, wine only runs from the same directory as the executable
 
 echo "----------------"
-echo "FINISH Installing Wreckfest 2 Dedicated Server from Steam"
+echo "Finished Installing Wreckfest 2 Dedicated Server from Steam"
 echo "----------------"
 
+echo "----------------"
+echo "Starting Wreckfest 2 Dedicated Server in WINE"
+echo "----------------"
 
-# experimental console env var is EXPERIMENTAL_CONSOLE=1
+cd $STEAMAPPDIR
 
-if [ "$EXPERIMENTAL_CONSOLE" = "1" ]; then
-    echo "hello"
-else
-    echo "world"
-fi
+wine Wreckfest2.exe --server --save-dir="$SERVERCONFIGDIR" > "${WINELOGDIR}/stdout.log" 2> "${WINELOGDIR}/stderr.log" &
 
-if [ "$EXPERIMENTAL_CONSOLE" == "1" ]; then
-    echo "----------------"
-    echo "START Wreckfest 2 Dedicated Server in WINE"
-    echo "----------------"
-    cd $STEAMAPPDIR
+cd $HOME
 
-    wine Wreckfest2.exe --server --save-dir="$SERVERCONFIGDIR" > "${WINELOGDIR}/stdout.log" 2> "${WINELOGDIR}/stderr.log" &
+echo "----------------"
+echo "Wreckfest 2 Dedicated Server has been started in WINE"
+echo "----------------"
 
-    cd $HOME
+# Get wreckfest window ID
+echo "----------------"
+echo "Geting Wreckfest Window ID"
+echo "----------------"
 
-    echo "----------------"
-    echo "FINISH Wreckfest 2 Dedicated Server in WINE"
-    echo "----------------"
+export WID=$(xdotool search --name Wreckfest)
 
-    # Get wreckfest window ID
-    echo "----------------"
-    echo "START Get Wreckfest Window ID"
-    echo "----------------"
-
-    export WID=$(xdotool search --name Wreckfest)
-
-    # Wait for the server to start
-    while [ -z "$WID" ]; do
-        sleep 1
-        export WID=$(xdotool search --name Wreckfest)
-    done
-
+# Wait for the server to start
+while [ -z "$WID" ]; do
     sleep 1
+    export WID=$(xdotool search --name Wreckfest)
+done
 
-    echo "----------------"
-    echo "FINISH Get Wreckfest Window ID"
-    echo "----------------"
+sleep 1
 
-    # Move the window to the top left corner
-    xdotool windowmove $WID 0 0
+echo "----------------"
+echo "Finished getting Wreckfest Window ID"
+echo "----------------"
 
-    python3 "$WRAPPERDIR/main.py"
+# Move the window to the top left corner
+xdotool windowmove $WID 0 0
 
-else
+echo "----------------"
+echo "Starting Console"
+echo "----------------"
 
-    wine Wreckfest2.exe --server --save-dir="$SERVERCONFIGDIR" > "${WINELOGDIR}/stdout.log" 2> "${WINELOGDIR}/stderr.log"
+sleep 2
 
-fi
+python3 "$WRAPPERDIR/main.py"
