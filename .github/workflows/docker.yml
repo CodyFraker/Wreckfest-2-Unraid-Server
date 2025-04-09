@@ -1,7 +1,9 @@
 name: ci
 
 on:
-  push:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   docker:
@@ -18,4 +20,13 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: nvitaterna/wreckfest2-docker-server:latest
+          tags: |
+            nvitaterna/wreckfest2-docker-server:latest
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          build-args: |
+            CONSOLE=with-console
+          tags: |
+            nvitaterna/wreckfest2-docker-server:console

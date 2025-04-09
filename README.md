@@ -10,4 +10,4 @@ docker run -d -p 30100:30100/udp nvitaterna/wreckfest2-docker-server
 
 Running the image with the experimental console:
 
-docker run -p 30100:30100/udp -e EXPERIMENTAL_CONSOLE=1 nvitaterna/wreckfest2-docker-server
+docker run -p 30100:30100/udp nvitaterna/wreckfest2-docker-server:console
