@@ -3,9 +3,9 @@
     "net server config": [
         {
             "bbmeta": "ncnf v1 n1",
-            "name": "Server",
-            "description": "Welcome to my server!",
-            "password": "",
+            "name": "$SERVER_NAME",
+            "description": "$SERVER_DESC",
+            "password": "$SERVER_PASS",
             "game port": 30100
         }
     ],
