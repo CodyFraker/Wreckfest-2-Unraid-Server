@@ -2,7 +2,7 @@
 echo "~~ Setting Variables ~~"
 export WINEARCH=win64
 export WINEDEBUG=-all
-export DISPLAY=:99
+export DISPLAY=:0
 
 # Going to start bringing over some vars from ich777's Wreckfest server script.
 
