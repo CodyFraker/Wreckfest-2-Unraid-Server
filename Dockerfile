@@ -1,4 +1,4 @@
-ARG CONSOLE=no-console
+ARG CONSOLE=with-console
 
 FROM debian:bookworm-slim AS base
 
@@ -90,11 +90,11 @@ COPY --chown=steam dummy-640x480.conf /home/steam/dummy-640x480.conf
 
 COPY --chown=steam entry.sh /home/steam/entry.sh
 
-# WITHOUT CONSOLE
+# # WITHOUT CONSOLE
 
-FROM base AS version-no-console
+# FROM base AS version-no-console
 
-COPY --chown=steam entry-no-console.sh /home/steam/entry.sh
+# COPY --chown=steam entry-no-console.sh /home/steam/entry.sh
 
 # COMMON
 

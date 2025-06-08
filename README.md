@@ -1,3 +1,6 @@
+I'm trying to get this to work easily with unraid. It's close but needs some massaging. Avoid using this until this message is removed unless you know what you're doing.
+
+
 # wreckfest2-docker-server
 
 NOTE: This is a very early version of this project. There are no guarantees that it will work as expected, though the actual server should be stable enough for normal use.
