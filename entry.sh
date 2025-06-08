@@ -1,6 +1,10 @@
 #!/bin/bash
+echo "~~ Setting Variables ~~"
+export WINEARCH=win64
+export WINEDEBUG=-all
+export DISPLAY=:99
 
-export DISPLAY=:0
+# Going to start bringing over some vars from ich777's Wreckfest server script.
 
 # run virtual display in  background
 X -config /home/steam/dummy-640x480.conf >> "${XLOGDIR}/stdout.log" 2>> "${XLOGDIR}/stderr.log" &
