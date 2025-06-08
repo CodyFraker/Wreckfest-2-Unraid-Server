@@ -3,9 +3,9 @@
     "net server config": [
         {
             "bbmeta": "ncnf v1 n1",
-            "name": "$SERVER_NAME",
-            "description": "$SERVER_DESC",
-            "password": "$SERVER_PASS",
+            "name": "UNRAID TEST SERVER",
+            "description": "TEST",
+            "password": "",
             "game port": 30100
         }
     ],
@@ -33,11 +33,11 @@
                             "number of teams": 2,
                             "max number of participants": 24,
                             "flags": "",
-                            "car reset delay (seconds)": 5,
+                            "car reset delay (seconds)": 1,
                             "vehicle damage id": "normal"
                         }
                     ],
-                    "bot count": 8
+                    "bot count": 12
                 }
             ],
             "countdown time": 100000,
