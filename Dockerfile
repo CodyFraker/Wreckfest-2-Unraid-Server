@@ -72,6 +72,9 @@ RUN apt install -y xdotool
 
 RUN apt install -y xclip
 
+# Install network debugging tools and winetricks
+RUN apt install -y dnsutils iputils-ping winetricks net-tools
+
 ENV XLOGDIR /home/steam/logs/x
 
 ENV WINELOGDIR /home/steam/logs/wine
