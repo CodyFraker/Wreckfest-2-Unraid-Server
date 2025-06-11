@@ -102,7 +102,8 @@ cd ${SERVER_DIR}
 
 if [ "${DEBUG_MODE}" == "true" ]; then
     echo "---Debug Mode: Running server with output to Docker logs---"
-    wine64 Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
+    # Run server directly in foreground so all output goes to Docker logs
+    exec wine64 Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
 else
     echo "---Normal Mode: Running server in screen session---"
     screen -S Wreckfest2 -d -m wine64 Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
