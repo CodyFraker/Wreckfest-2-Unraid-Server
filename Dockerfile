@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.source="https://github.com/CodyFraker/Wreckfest-2
 
 RUN dpkg --add-architecture i386 && \
 	apt-get update && \
-	apt-get -y install --no-install-recommends lib32gcc-s1 screen xvfb winbind net-tools && \
+	apt-get -y install --no-install-recommends lib32gcc-s1 screen xvfb winbind net-tools wine32 && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN wget -O /tmp/gotty.tar.gz https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz && \
@@ -27,7 +27,7 @@ ENV GID=100
 ENV USERNAME=""
 ENV PASSWRD=""
 ENV USER="steam"
-ENV TERM=linux
+ENV TERM=xterm
 ENV DATA_PERM=770
 
 RUN mkdir $DATA_DIR && \
