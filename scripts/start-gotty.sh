@@ -36,8 +36,8 @@ if screen -list 2>/dev/null | grep -q "Wreckfest2"; then
     echo "Command: gotty --port 8080 ${GOTTY_PARAMS} screen -x Wreckfest2"
     echo ""
     
-    # Start gotty
-    exec gotty --port 8080 ${GOTTY_PARAMS} screen -xS Wreckfest2
+    # Start Gotty as the same user running the screen session
+    exec su - steam -c "gotty --port 8080 --permit-write --title-format Wreckfest2-Console screen -xS Wreckfest2"
 else
     echo ""
     echo "❌ ERROR: Cannot find Wreckfest2 screen session"
