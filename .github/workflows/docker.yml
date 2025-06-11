@@ -33,7 +33,7 @@ jobs:
                 docker buildx inspect
                 docker buildx build \
                 --platform linux/arm64,linux/amd64 \
-                -t ${{ env.GITHUB_REGISTRY }}/${{ env.DOCKER_IMAGE }}/wreckfest2:latest \
-                -t ${{ env.GITHUB_REGISTRY }}/${{ env.DOCKER_IMAGE }}/wreckfest2:${{ github.sha }} \
+                -t ${{ env.GITHUB_REGISTRY }}/codyfraker/wreckfest-2-server:latest \
+                -t ${{ env.GITHUB_REGISTRY }}/codyfraker/wreckfest-2-server:${{ github.sha }} \
                 -f Dockerfile \
                 --push .
