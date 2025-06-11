@@ -120,8 +120,8 @@ else
     echo "---Checking screen session status---"
     screen -list
     if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
-        echo "---Starting web console---"
-        /opt/scripts/start-gotty.sh 2>/dev/null &
+        echo "---Starting web console as current user---"
+        /opt/scripts/start-gotty.sh &
     fi
     sleep 1
     tail --pid=$(pgrep Wreckfest2.exe) -f /dev/null
