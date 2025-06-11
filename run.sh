@@ -1,1 +1,0 @@
-docker run -v ./wf2-server:/home/steam/wf2-server -p 30100:30100/udp -p 5900:5900 -it --entrypoint=/bin/bash 87c95e8b92e5

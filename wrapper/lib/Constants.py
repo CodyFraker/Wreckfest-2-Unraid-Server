@@ -1,2 +1,0 @@
-USER_INPUT_SUFFIX = ' #userinput_'
-USER_INPUT_TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'

@@ -1,7 +1,7 @@
 FROM ich777/winehq-baseimage
 
-LABEL org.opencontainers.image.authors="codyfraker@gmail.com"
-LABEL org.opencontainers.image.source="https://github.com/CodyFraker/Wreckfest-2-Unraid-Server"
+LABEL org.opencontainers.image.authors="your-email@example.com"
+LABEL org.opencontainers.image.source="https://github.com/your-repo/wreckfest2-docker-server"
 
 RUN dpkg --add-architecture i386 && \
 	apt-get update && \
