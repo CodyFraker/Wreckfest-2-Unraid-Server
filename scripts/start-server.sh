@@ -125,15 +125,14 @@ else
         echo "---Web console started with PID: $!---"
     fi
     sleep 2
-    echo "---Checking if Wreckfest2 process is running---"
-    WRECKFEST_PID=$(pgrep Wreckfest2.exe)
-    if [ -n "$WRECKFEST_PID" ]; then
-        echo "---Wreckfest2 process found with PID: $WRECKFEST_PID---"
-        tail --pid=$WRECKFEST_PID -f /dev/null
+    echo "---Searching for active wineconsole screen session---"
+    if screen -list | grep -q "Wreckfest2"; then
+        echo "---Wreckfest2 screen session is active---"
+        tail -f /dev/null
     else
-        echo "---ERROR: Wreckfest2 process not found---"
-        echo "---Available processes:---"
-        ps aux | grep -E "(wine|Wreckfest)" | grep -v grep
+        echo "---ERROR: Wreckfest2 screen session not found---"
+        echo "---Available screen sessions:---"
+        screen -list
         exit 1
     fi
 fi 
