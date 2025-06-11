@@ -99,10 +99,17 @@ sleep 3
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-screen -S Wreckfest2 -d -m wine64 Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
-sleep 1
-if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
-    /opt/scripts/start-gotty.sh 2>/dev/null &
-fi
-sleep 1
-tail --pid=$(pgrep Wreckfest2.exe) -f /dev/null 
+
+if [ "${DEBUG_MODE}" == "true" ]; then
+    echo "---Debug Mode: Running server with output to Docker logs---"
+    wine64 Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
+else
+    echo "---Normal Mode: Running server in screen session---"
+    screen -S Wreckfest2 -d -m wine64 Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
+    sleep 1
+    if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
+        /opt/scripts/start-gotty.sh 2>/dev/null &
+    fi
+    sleep 1
+    tail --pid=$(pgrep Wreckfest2.exe) -f /dev/null
+fi 

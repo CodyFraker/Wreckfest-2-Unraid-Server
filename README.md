@@ -23,12 +23,26 @@ This Docker container will download and install SteamCMD and Wreckfest 2 Dedicat
 | USERNAME | Steam username (leave blank for anonymous login) | blank |
 | PASSWRD | Steam password (leave blank for anonymous login) | blank |
 | ENABLE_WEBCONSOLE | Enable web console access | true |
+| DEBUG_MODE | Run server with output to Docker logs instead of screen session | false |
 
 ## Run example
 ```
 docker run --name Wreckfest2 -d \
 	-p 30100:30100/udp -p 8080:8080 \
 	--env 'GAME_ID=3519390' \
+	--env 'UID=99' \
+	--env 'GID=100' \
+	--volume /path/to/steamcmd:/serverdata/steamcmd \
+	--volume /path/to/wreckfest2:/serverdata/serverfiles \
+	your-repo/wreckfest2-server:latest
+```
+
+### Debug Mode Example
+```
+docker run --name Wreckfest2 -d \
+	-p 30100:30100/udp -p 8080:8080 \
+	--env 'GAME_ID=3519390' \
+	--env 'DEBUG_MODE=true' \
 	--env 'UID=99' \
 	--env 'GID=100' \
 	--volume /path/to/steamcmd:/serverdata/steamcmd \

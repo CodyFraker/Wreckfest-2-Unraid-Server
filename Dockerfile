@@ -20,6 +20,7 @@ ENV GAME_PARAMS=""
 ENV VALIDATE=""
 ENV ENABLE_WEBCONSOLE="true"
 ENV GOTTY_PARAMS="-w --title-format Wreckfest2"
+ENV DEBUG_MODE="false"
 ENV UMASK=000
 ENV UID=99
 ENV GID=100
@@ -39,7 +40,7 @@ ADD /scripts/ /opt/scripts/
 RUN chmod -R 770 /opt/scripts/
 
 # Copy config files
-COPY server_config.scnf ${SERVER_DIR}/initial_server_config.scnf
+COPY server_config.scnf ${SERVER_DIR}/server_config.scnf
 
 EXPOSE 30100/udp
 
