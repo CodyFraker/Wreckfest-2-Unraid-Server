@@ -19,14 +19,15 @@ ENV GAME_ID="3519390"
 ENV GAME_PARAMS=""
 ENV VALIDATE=""
 ENV ENABLE_WEBCONSOLE="true"
-ENV GOTTY_PARAMS="-w --title-format Wreckfest2"
+ENV GOTTY_PARAMS="--permit-write --title-format Wreckfest2-Console"
 ENV DEBUG_MODE="false"
 ENV UMASK=000
 ENV UID=99
 ENV GID=100
 ENV USERNAME=""
 ENV PASSWRD=""
-ENV USER="root"
+ENV USER="steam"
+ENV TERM=linux
 ENV DATA_PERM=770
 
 RUN mkdir $DATA_DIR && \

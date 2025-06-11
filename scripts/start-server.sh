@@ -120,9 +120,20 @@ else
     echo "---Checking screen session status---"
     screen -list
     if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
-        echo "---Starting web console as current user---"
-        /opt/scripts/start-gotty.sh &
+        echo "---Starting web console as current user: $(whoami)---"
+        nohup /opt/scripts/start-gotty.sh > /tmp/gotty.log 2>&1 &
+        echo "---Web console started with PID: $!---"
     fi
-    sleep 1
-    tail --pid=$(pgrep Wreckfest2.exe) -f /dev/null
+    sleep 2
+    echo "---Checking if Wreckfest2 process is running---"
+    WRECKFEST_PID=$(pgrep Wreckfest2.exe)
+    if [ -n "$WRECKFEST_PID" ]; then
+        echo "---Wreckfest2 process found with PID: $WRECKFEST_PID---"
+        tail --pid=$WRECKFEST_PID -f /dev/null
+    else
+        echo "---ERROR: Wreckfest2 process not found---"
+        echo "---Available processes:---"
+        ps aux | grep -E "(wine|Wreckfest)" | grep -v grep
+        exit 1
+    fi
 fi 
