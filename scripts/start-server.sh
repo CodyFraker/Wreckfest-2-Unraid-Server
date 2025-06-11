@@ -100,6 +100,15 @@ sleep 3
 echo "---Start Server---"
 cd ${SERVER_DIR}
 
+# Check if game executable exists
+if [ ! -f "Wreckfest2.exe" ]; then
+    echo "---ERROR: Wreckfest2.exe not found in ${SERVER_DIR}---"
+    ls -la ${SERVER_DIR}/
+    exit 1
+fi
+
+echo "---Game executable found: Wreckfest2.exe---"
+
 if [ "${DEBUG_MODE}" == "true" ]; then
     echo "---Debug Mode: Running server with output to Docker logs---"
     # Run server directly in foreground so all output goes to Docker logs
@@ -107,8 +116,11 @@ if [ "${DEBUG_MODE}" == "true" ]; then
 else
     echo "---Normal Mode: Running server in screen session---"
     screen -S Wreckfest2 -d -m wine64 Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
-    sleep 1
+    sleep 2
+    echo "---Checking screen session status---"
+    screen -list
     if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
+        echo "---Starting web console---"
         /opt/scripts/start-gotty.sh 2>/dev/null &
     fi
     sleep 1
