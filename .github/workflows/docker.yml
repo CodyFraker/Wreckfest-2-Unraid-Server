@@ -32,7 +32,7 @@ jobs:
                 docker buildx create --use
                 docker buildx inspect
                 docker buildx build \
-                --platform linux/arm64,linux/amd64 \
+                --platform linux/amd64 \
                 -t ${{ env.GITHUB_REGISTRY }}/codyfraker/wreckfest-2-server:latest \
                 -t ${{ env.GITHUB_REGISTRY }}/codyfraker/wreckfest-2-server:${{ github.sha }} \
                 -f Dockerfile \
