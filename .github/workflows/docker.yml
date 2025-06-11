@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-      - headless-server
 
 env:
     GITHUB_REGISTRY: ghcr.io
@@ -34,7 +33,7 @@ jobs:
                 docker buildx inspect
                 docker buildx build \
                 --platform linux/arm64,linux/amd64 \
-                -t ${{ env.GITHUB_REGISTRY }}/${{ env.DOCKER_IMAGE }}:latest \
-                -t ${{ env.GITHUB_REGISTRY }}/${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
+                -t ${{ env.GITHUB_REGISTRY }}/${{ env.DOCKER_IMAGE }}/wreckfest2:latest \
+                -t ${{ env.GITHUB_REGISTRY }}/${{ env.DOCKER_IMAGE }}/wreckfest2:${{ github.sha }} \
                 -f Dockerfile \
                 --push .
