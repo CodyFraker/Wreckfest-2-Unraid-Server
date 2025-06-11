@@ -1,2 +1,2 @@
 #!/bin/bash
-gotty ${GOTTY_PARAMS} screen -r Wreckfest2 
+gotty --port 8080 ${GOTTY_PARAMS} screen -r Wreckfest2 
