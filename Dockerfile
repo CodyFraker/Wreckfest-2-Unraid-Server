@@ -32,7 +32,7 @@ ENV DATA_PERM=770
 RUN mkdir $DATA_DIR && \
 	mkdir $STEAMCMD_DIR && \
 	mkdir $SERVER_DIR && \
-	useradd -d $DATA_DIR -s /bin/bash $USER && \
+	if [ "$USER" != "root" ]; then useradd -d $DATA_DIR -s /bin/bash $USER; fi && \
 	chown -R $USER $DATA_DIR && \
 	ulimit -n 2048
 
