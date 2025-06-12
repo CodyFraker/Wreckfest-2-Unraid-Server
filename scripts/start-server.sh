@@ -115,7 +115,7 @@ if [ "${DEBUG_MODE}" == "true" ]; then
     exec wineconsole --backend=curses Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
 else
     echo "---Normal Mode: Running server in screen session---"
-    screen -S Wreckfest2 -d -m wineconsole --backend=curses Wreckfest2.exe --server --save-dir=/serverdata/serverfiles ${GAME_PARAMS}
+    screen -S Wreckfest2 -d -m /opt/scripts/start-wreckfest-bash.sh
     sleep 2
     echo "---Checking screen session status---"
     screen -list
