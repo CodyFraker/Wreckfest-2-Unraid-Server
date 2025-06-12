@@ -1,7 +1,11 @@
-## WIP: This line will be removed once its confirmed to work on my server!
+> **Warning**
+> This is still a work in progress.
+
+Current Status: Server is running but unable to use console right now.
+
+Read (this)[https://github.com/CodyFraker/wreckfest-2-unraid-server/wiki/How-to-add-this-to-Unraid] if you'd like to get Wreckfest 2 dedicated server running on Unraid.
 
 # Wreckfest 2 Dedicated Server for Unraid
-
 This Docker container will download and install SteamCMD and Wreckfest 2 Dedicated Server, then run it with Wine.
 
 **Persistent Storage:** The container uses shared volumes for both SteamCMD and game files, so the game won't be re-downloaded on every restart.
